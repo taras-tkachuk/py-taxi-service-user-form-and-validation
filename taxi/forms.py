@@ -9,8 +9,8 @@ from taxi.models import Driver, Car
 def validate_license_number(license_number) -> str:
     if (
             len(license_number) != 8
-            or not (license_number[:3].isupper() and
-                    license_number[:3].isalpha())
+            or not (license_number[:3].isupper()
+                    and license_number[:3].isalpha())
             or not license_number[3:].isdigit()
     ):
         raise ValidationError([
