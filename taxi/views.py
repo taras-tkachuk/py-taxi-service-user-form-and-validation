@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -114,6 +114,4 @@ def update_drivers(request, pk: int):
         car.drivers.remove(request.user)
         car.save()
 
-    context = {"car": car}
-
-    return render(request, "taxi/car_detail.html", context=context)
+    return HttpResponseRedirect(reverse_lazy("taxi:car-detail", kwargs={"pk": pk}))

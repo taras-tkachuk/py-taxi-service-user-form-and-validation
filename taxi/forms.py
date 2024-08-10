@@ -14,7 +14,7 @@ def validate_license_number(license_number) -> str:
             or not license_number[3:].isdigit()
     ):
         raise ValidationError([
-            "Your password must consist only of 8 characters.\t"
+            "Your licence number must consist only of 8 characters.\t"
             "First 3 characters are uppercase letters.\t"
             "Last 5 characters are digits."
         ])
