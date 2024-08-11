@@ -63,6 +63,19 @@ class CarListView(LoginRequiredMixin, generic.ListView):
 class CarDetailView(LoginRequiredMixin, generic.DetailView):
     model = Car
 
+    def post(self, request, *args, **kwargs) -> HttpResponseRedirect:
+        car = self.get_object()
+        if "assign" in request.POST:
+            car.drivers.add(self.request.user)
+        elif "remove" in request.POST:
+            car.drivers.remove(self.request.user)
+        return HttpResponseRedirect(
+            reverse_lazy(
+                "taxi:car-detail",
+                kwargs={"pk": car.id}
+            )
+        )
+
 
 class CarCreateView(LoginRequiredMixin, generic.CreateView):
     model = Car
