@@ -69,6 +69,7 @@ class CarDetailView(LoginRequiredMixin, generic.DetailView):
             car.drivers.add(self.request.user)
         elif "remove" in request.POST:
             car.drivers.remove(self.request.user)
+        car.save()
         return HttpResponseRedirect(
             reverse_lazy(
                 "taxi:car-detail",
